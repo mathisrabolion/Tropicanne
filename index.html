@@ -1,1446 +1,1374 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tropicanne - Jus de canne à sucre frais, artisanal et naturel en Guadeloupe. Pressé le jour même au Lamentin et livré à domicile le dimanche.">
-    <meta name="keywords" content="jus de canne, guadeloupe, tropicanne, lamentin, produit frais, artisanal, local, baie-mahault, petit-bourg, les abymes">
-    <title>Tropicanne | Jus de Canne à Sucre Frais et Artisanal de Guadeloupe</title>
-    
-    <!-- Polices Web Premium et Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* ==========================================================================
-           VARIABLES CSS & THEMES (Light / Dark Mode via prefers-color-scheme)
-           ========================================================================== */
-        :root {
-            /* Palette Inspirée des Caraïbes */
-            --primary-green: #1B4D22;       /* Vert canne à sucre profond */
-            --primary-light: #4A7c59;       /* Vert canne jeune */
-            --accent-yellow: #F4C430;       /* Jaune soleil tropical */
-            --accent-yellow-hover: #E5B21D;
-            --fresh-green: #2E7D32;
-            
-            /* Couleurs de fond et de surfaces */
-            --bg-color: #FAFCFA;            /* Fond rafraîchissant très légèrement verdâtre */
-            --bg-alt: #F0F5F0;              /* Section alternative */
-            --text-color: #1A261C;          /* Texte sombre à base verte */
-            --text-light: #4E6151;          /* Texte secondaire */
-            --card-bg: #FFFFFF;
-            --border-color: rgba(27, 77, 34, 0.1);
-            
-            /* Alerte & Infos */
-            --alert-bg: #FFF8E1;
-            --alert-border: #FFE082;
-            --alert-text: #7F5F00;
-            
-            /* Thème des boutons WhatsApp */
-            --whatsapp-color: #25D366;
-            --whatsapp-dark: #128C7E;
-            
-            /* Ombres */
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 30px rgba(27, 77, 34, 0.08);
-            --shadow-lg: 0 20px 40px rgba(0,0,0,0.1);
-            
-            /* Transitions */
-            --transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #0B110C;        /* Fond noir canne */
-                --bg-alt: #121A13;          /* Section sombre alternative */
-                --text-color: #ECEFEF;
-                --text-light: #9BB09E;
-                --card-bg: #162218;
-                --border-color: rgba(236, 239, 239, 0.1);
-                
-                --alert-bg: #2C240E;
-                --alert-border: #4D3D18;
-                --alert-text: #FFE082;
-            }
-        }
-
-        /* ==========================================================================
-           RESETS & ACCESSIBILITÉ
-           ========================================================================== */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 90px;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
-        }
-
-        /* Focus d'accessibilité visible */
-        a:focus-visible, button:focus-visible {
-            outline: 3px solid var(--accent-yellow);
-            outline-offset: 3px;
-        }
-
-        /* ==========================================================================
-           STRUCTURE REUTILISABLE
-           ========================================================================== */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section {
-            padding: 6rem 0;
-        }
-
-        .bg-alt {
-            background-color: var(--bg-alt);
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 4rem;
-        }
-
-        .section-tag {
-            color: var(--fresh-green);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            display: block;
-            margin-bottom: 0.75rem;
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background-color: var(--accent-yellow);
-            margin: 1rem auto 0;
-            border-radius: 4px;
-        }
-
-        /* Boutons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-primary {
-            background-color: var(--accent-yellow);
-            color: #1A261C !important;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-yellow-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(244, 196, 48, 0.3);
-        }
-
-        .btn-whatsapp {
-            background-color: var(--whatsapp-color);
-            color: white !important;
-        }
-
-        .btn-whatsapp:hover {
-            background-color: var(--whatsapp-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
-        }
-
-        /* ==========================================================================
-           HEADER & LOGO TROPICANNE
-           ========================================================================== */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: var(--shadow-sm);
-            z-index: 1000;
-            transition: background-color 0.3s ease;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .header {
-                background-color: rgba(11, 17, 12, 0.85);
-            }
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 90px;
-        }
-
-        /* Stylisation du Logo Tropicanne */
-        .logo {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-color);
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-
-        /* "i" stylisé canne à sucre en SVG */
-        .cane-i-wrapper {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 38px;
-            margin-bottom: -4px;
-        }
-
-        .cane-i-svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Navigation */
-        .nav {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-        }
-
-        .nav-list {
-            display: flex;
-            gap: 2.5rem;
-        }
-
-        .nav-link {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-color);
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--fresh-green);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* ==========================================================================
-           HERO SECTION WITH GUADELOUPE LOCAL PHOTO
-           ========================================================================== */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 90px;
-            /* Magnifique photo locale d'un champ de cannes à sucre de Guadeloupe */
-            background-image: url('http://googleusercontent.com/image_collection/image_retrieval/2742113698785735284_0');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            /* Filtre dégradé élégant pour conserver la lisibilité du texte clair */
-            background: linear-gradient(135deg, rgba(11, 17, 12, 0.9) 30%, rgba(11, 17, 12, 0.45) 100%);
-            z-index: 1;
-        }
-
-        .hero-container {
-            position: relative;
-            z-index: 2;
-            color: #FFFFFF;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            padding: 4rem 0;
-        }
-
-        .hero-content {
-            max-width: 750px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-badge {
-            background-color: rgba(46, 125, 50, 0.25);
-            border: 1px solid var(--fresh-green);
-            color: var(--accent-yellow);
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(5px);
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            line-height: 1.15;
-            margin-bottom: 1.5rem;
-            color: #FFFFFF;
-        }
-
-        .hero h1 span {
-            color: var(--accent-yellow);
-        }
-
-        .hero-p {
-            font-size: 1.25rem;
-            color: #E2ECE5;
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .hero-price-tag {
-            display: flex;
-            flex-direction: column;
-            border-left: 3px solid var(--accent-yellow);
-            padding-left: 1.2rem;
-        }
-
-        .hero-price-amount {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent-yellow);
-            line-height: 1;
-        }
-
-        .hero-price-vol {
-            font-size: 0.85rem;
-            color: #C1D5C5;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: 0.25rem;
-        }
-
-        /* ==========================================================================
-           SECTION ALERTE PRODUIT FRAIS
-           ========================================================================== */
-        .alert-section {
-            background-color: var(--bg-color);
-            padding-top: 4rem;
-            padding-bottom: 0;
-        }
-
-        .alert-wrapper {
-            background-color: var(--alert-bg);
-            border: 2px dashed var(--alert-border);
-            border-radius: 16px;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            color: var(--alert-text);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .alert-icon-container {
-            flex-shrink: 0;
-            width: 55px;
-            height: 55px;
-            background-color: rgba(127, 95, 0, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .alert-text-content h3 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.4rem;
-            color: var(--alert-text);
-        }
-
-        .alert-text-content p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* ==========================================================================
-           SECTION POURQUOI TROPICANNE
-           ========================================================================== */
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .why-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem 2rem;
-            border-radius: 16px;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .why-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-md);
-            border-color: rgba(46, 125, 50, 0.25);
-        }
-
-        .why-badge-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            background-color: var(--bg-alt);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .why-card:hover .why-badge-icon {
-            background-color: var(--primary-green);
-        }
-
-        .why-badge-icon svg {
-            width: 32px;
-            height: 32px;
-            stroke: var(--primary-green);
-            fill: none;
-            transition: var(--transition);
-        }
-
-        .why-card:hover .why-badge-icon svg {
-            stroke: var(--accent-yellow);
-        }
-
-        .why-card h3 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text-color);
-        }
-
-        .why-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* ==========================================================================
-           SECTION PRODUIT
-           ========================================================================== */
-        .product-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .product-showcase {
-            position: relative;
-        }
-
-        .product-main-img {
-            border-radius: 24px;
-            box-shadow: var(--shadow-lg);
-            width: 100%;
-            height: 520px;
-            object-fit: cover;
-            /* Photo ultra qualitative d'un verre de jus frais à côté de morceaux de canne */
-            content: url('http://googleusercontent.com/image_collection/image_retrieval/14826535759102206659_0');
-        }
-
-        /* Décoration feuille tropicale en background */
-        .product-deco {
-            position: absolute;
-            z-index: -1;
-            bottom: -30px;
-            left: -30px;
-            width: 200px;
-            height: 200px;
-            background-color: var(--accent-yellow);
-            border-radius: 40px;
-            transform: rotate(15deg);
-            opacity: 0.2;
-        }
-
-        .product-details {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .product-title {
-            font-size: 2.8rem;
-            line-height: 1.2;
-        }
-
-        .product-meta-pill {
-            align-self: flex-start;
-            background-color: var(--accent-yellow);
-            color: #1A261C;
-            font-weight: 700;
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-        }
-
-        .product-desc {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        .product-bullets {
-            margin: 1rem 0;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .product-bullet-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            font-size: 1.05rem;
-        }
-
-        .product-bullet-item svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--fresh-green);
-            fill: none;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .product-pricing-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem 2rem;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 1rem;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .price-label {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .price-val {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary-green);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .price-val {
-                color: var(--accent-yellow);
-            }
-        }
-
-        /* ==========================================================================
-           SECTION COMMENT COMMANDER
-           ========================================================================== */
-        .step-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
-            position: relative;
-        }
-
-        .step-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            transition: var(--transition);
-        }
-
-        .step-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .step-number {
-            width: 70px;
-            height: 70px;
-            background-color: var(--primary-green);
-            color: var(--accent-yellow);
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: -5.5rem auto 2rem;
-            box-shadow: var(--shadow-sm);
-            border: 4px solid var(--bg-color);
-        }
-
-        .step-card h3 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--text-color);
-        }
-
-        .step-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        /* ==========================================================================
-           SECTION LIVRAISON & ZONE DESSERVIE
-           ========================================================================== */
-        .delivery-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .delivery-visual-card {
-            background-color: var(--primary-green);
-            color: #FFFFFF;
-            padding: 3rem;
-            border-radius: 24px;
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Décoration caraïbes */
-        .delivery-visual-card::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: rgba(244, 196, 48, 0.1);
-            border-radius: 50%;
-        }
-
-        .delivery-visual-card h3 {
-            color: var(--accent-yellow);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .delivery-communes-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .commune-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .commune-item svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--accent-yellow);
-            fill: none;
-        }
-
-        .delivery-badge-origin {
-            display: inline-block;
-            background-color: rgba(255, 255, 255, 0.15);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-
-        .delivery-instruction {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .delivery-instruction h2 {
-            font-size: 2.5rem;
-            line-height: 1.2;
-        }
-
-        .delivery-lead {
-            font-size: 1.15rem;
-            color: var(--text-light);
-        }
-
-        .deadline-highlight-box {
-            background-color: var(--alert-bg);
-            border-left: 5px solid var(--accent-yellow);
-            padding: 1.5rem;
-            border-radius: 8px;
-            color: var(--alert-text);
-        }
-
-        .deadline-highlight-box strong {
-            display: block;
-            font-size: 1.2rem;
-            margin-bottom: 0.4rem;
-        }
-
-        /* ==========================================================================
-           SECTION FAQ (ACCORDEON ACCESSIBLE SANS JS)
-           ========================================================================== */
-        .faq-accordion {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .faq-item {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .faq-item[open] {
-            border-color: var(--primary-green);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .faq-summary {
-            padding: 1.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-        }
-
-        /* Enlever la flèche par défaut Safari */
-        .faq-summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .faq-summary-arrow {
-            width: 24px;
-            height: 24px;
-            stroke: var(--primary-green);
-            fill: none;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item[open] .faq-summary-arrow {
-            transform: rotate(180deg);
-        }
-
-        .faq-content {
-            padding: 0 1.5rem 1.5rem;
-            color: var(--text-light);
-            border-top: 1px solid rgba(27, 77, 34, 0.05);
-            padding-top: 1rem;
-        }
-
-        /* ==========================================================================
-           SECTION TEMOIGNAGES CLIENTS
-           ========================================================================== */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .testimonial-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 1.5rem;
-            position: relative;
-        }
-
-        .testimonial-quote {
-            font-size: 1rem;
-            font-style: italic;
-            color: var(--text-color);
-            position: relative;
-            z-index: 2;
-        }
-
-        .quote-icon {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            width: 50px;
-            height: 50px;
-            opacity: 0.05;
-            fill: var(--primary-green);
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .author-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background-color: var(--bg-alt);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--primary-green);
-            border: 2px solid var(--accent-yellow);
-        }
-
-        .author-info h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1rem;
-            color: var(--text-color);
-        }
-
-        .author-info p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        /* ==========================================================================
-           FOOTER
-           ========================================================================== */
-        .footer {
-            background-color: #0B110C;
-            color: #C1D5C5;
-            padding: 5rem 0 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-brand h2 {
-            font-size: 2.2rem;
-            color: #FFFFFF;
-            margin-bottom: 1rem;
-        }
-
-        .footer-brand p {
-            max-width: 320px;
-            line-height: 1.6;
-        }
-
-        .footer-column h3 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.1rem;
-            color: #FFFFFF;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .footer-link:hover {
-            color: var(--accent-yellow);
-        }
-
-        .footer-contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-contact-item svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--accent-yellow);
-            fill: none;
-            flex-shrink: 0;
-            margin-top: 3px;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            font-size: 0.85rem;
-        }
-
-        /* ==========================================================================
-           BOUTON WHATSAPP FLOTTANT & RETOUR EN HAUT
-           ========================================================================== */
-        .whatsapp-float {
-            position: fixed;
-            width: 65px;
-            height: 65px;
-            bottom: 30px;
-            right: 30px;
-            background-color: var(--whatsapp-color);
-            color: #FFFFFF;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-            z-index: 999;
-            transition: var(--transition);
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1) rotate(8deg);
-            background-color: var(--whatsapp-dark);
-        }
-
-        .whatsapp-float-svg {
-            width: 35px;
-            height: 35px;
-            fill: currentColor;
-        }
-
-        /* Cercle pulsant d'appel à l'attention */
-        .whatsapp-float::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background-color: var(--whatsapp-color);
-            z-index: -1;
-            opacity: 0.5;
-            animation: pulseWave 2s infinite;
-        }
-
-        /* ==========================================================================
-           KEYFRAMES & ANIMATIONS
-           ========================================================================== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(35px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulseWave {
-            0% {
-                transform: scale(1);
-                opacity: 0.6;
-            }
-            100% {
-                transform: scale(1.4);
-                opacity: 0;
-            }
-        }
-
-        /* ==========================================================================
-           RESPONSIVE DESIGN (MEDIA QUERIES)
-           ========================================================================== */
-        @media (max-width: 1024px) {
-            .product-wrapper, .delivery-wrapper {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            
-            .product-main-img {
-                height: 400px;
-            }
-            
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav {
-                display: none; /* Simplification navigation sur mobile pour focaliser l'action sur WhatsApp */
-            }
-            
-            .header-container {
-                justify-content: center;
-                gap: 1.5rem;
-            }
-            
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-            
-            .hero-cta-group {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.2rem;
-            }
-            
-            .alert-wrapper {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tropicanne – Jus de canne artisanal · Guadeloupe</title>
+<meta name="description" content="Jus de canne à sucre 100% naturel, artisanal, pressé en Guadeloupe. Bouteille 1,5L à 4€. Commandez sur WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════ */
+:root {
+  --vert-canne:    #2D5A1B;
+  --vert-veg:      #4A8C2A;
+  --vert-pale:     #7DB85A;
+  --or-dore:       #C8A832;
+  --or-clair:      #E8C84A;
+  --beige:         #F5EDD3;
+  --beige-fonce:   #EDE0BB;
+  --brun-chaud:    #8B6914;
+  --texte:         #1E2E14;
+  --texte-doux:    #3D4E2A;
+  --blanc:         #FFFDF6;
+  --ombre:         rgba(30,46,20,0.12);
+  --wa-green:      #25D366;
+  --wa-dark:       #128C7E;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+
+  --radius:   14px;
+  --radius-lg: 24px;
+  --transition: 0.25s ease;
+  --max-w: 1100px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --beige:         #1A2E0E;
+    --beige-fonce:   #162509;
+    --blanc:         #1F3512;
+    --texte:         #E8F5D8;
+    --texte-doux:    #B8D49A;
+    --brun-chaud:    #D4A832;
+    --ombre:         rgba(0,0,0,0.35);
+    --vert-pale:     #5A9840;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--beige);
+  color: var(--texte);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ═══════════════════════════════
+   UTILITY
+═══════════════════════════════ */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 20px; }
+.sr-only { position: absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+/* ═══════════════════════════════
+   BOUTONS
+═══════════════════════════════ */
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--wa-green);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  box-shadow: 0 4px 18px rgba(37,211,102,0.35);
+  text-decoration: none;
+}
+.btn-wa:hover {
+  background: var(--wa-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,211,102,0.45);
+}
+.btn-wa svg { flex-shrink: 0; }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--vert-canne);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: 2px solid var(--vert-canne);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+.btn-outline:hover {
+  background: var(--vert-canne);
+  color: var(--blanc);
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-outline { color: var(--vert-pale); border-color: var(--vert-pale); }
+  .btn-outline:hover { background: var(--vert-pale); color: var(--beige-fonce); }
+}
+
+/* ═══════════════════════════════
+   NAVIGATION
+═══════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(245,237,211,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(74,140,42,0.15);
+  transition: background var(--transition);
+}
+
+@media (prefers-color-scheme: dark) {
+  nav {
+    background: rgba(26,46,14,0.94);
+    border-bottom-color: rgba(74,140,42,0.25);
+  }
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--vert-canne);
+  letter-spacing: -0.02em;
+}
+@media (prefers-color-scheme: dark) {
+  .logo { color: var(--vert-pale); }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--texte-doux);
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--vert-veg); }
+
+.nav-wa {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-wa span { display: none; }
+  .nav-wa { padding: 10px 14px; }
+}
+
+/* ═══════════════════════════════
+   HERO
+═══════════════════════════════ */
+.hero {
+  min-height: 100svh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 70px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, var(--vert-canne) 0%, #1A4010 40%, #2A5E18 70%, var(--vert-veg) 100%);
+}
+
+/* Canne SVG pattern background */
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  padding: 60px 20px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(200,168,50,0.2);
+  border: 1px solid rgba(200,168,50,0.4);
+  color: var(--or-clair);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--or-clair);
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  opacity: 0.88;
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+
+.hero-prix {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  background: rgba(200,168,50,0.15);
+  border: 1.5px solid rgba(200,168,50,0.5);
+  border-radius: var(--radius);
+  padding: 12px 20px;
+  margin-bottom: 32px;
+}
+.prix-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--or-clair);
+}
+.prix-info { font-size: 0.9rem; opacity: 0.8; }
+
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-bouteille {
+  width: 260px;
+  height: 420px;
+  background: linear-gradient(160deg, rgba(200,168,50,0.25) 0%, rgba(74,140,42,0.15) 100%);
+  border-radius: 30px 30px 60px 60px;
+  border: 2px solid rgba(200,168,50,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.bouteille-label {
+  text-align: center;
+  padding: 20px;
+}
+.bouteille-brand {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--or-clair);
+  letter-spacing: -0.02em;
+}
+.bouteille-sub {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-top: 4px;
+}
+.bouteille-vol {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-desc { margin-left: auto; margin-right: auto; }
+  .hero-eyebrow { margin-left: auto; margin-right: auto; }
+  .hero-prix { margin-left: auto; margin-right: auto; }
+  .hero-ctas { justify-content: center; }
+  .hero-visual { order: -1; }
+  .hero-bouteille { width: 180px; height: 280px; }
+  .bouteille-brand { font-size: 1.3rem; }
+}
+
+/* ═══════════════════════════════
+   SECTION ESPRIT
+═══════════════════════════════ */
+.esprit {
+  padding: 90px 0;
+  background: var(--blanc);
+}
+
+.esprit-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vert-veg);
+  margin-bottom: 14px;
+}
+
+.esprit h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--vert-canne);
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.esprit p {
+  font-size: 1.1rem;
+  color: var(--texte-doux);
+  margin-bottom: 16px;
+}
+.esprit p:last-of-type { margin-bottom: 0; }
+
+@media (prefers-color-scheme: dark) {
+  .esprit h2 { color: var(--vert-pale); }
+  .esprit p { color: var(--texte-doux); }
+}
+
+/* ═══════════════════════════════
+   PRODUIT
+═══════════════════════════════ */
+.produit {
+  padding: 90px 0;
+  background: var(--beige);
+}
+
+.produit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.produit-img-wrap {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, var(--vert-canne), var(--vert-veg));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.produit-svg-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.8);
+  gap: 12px;
+}
+
+.produit-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.produit-img-wrap img[src=""], .produit-img-wrap img:not([src]) {
+  display: none;
+}
+
+.produit-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--or-dore);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 50px;
+}
+
+.produit-content h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--vert-canne);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.produit-content p {
+  color: var(--texte-doux);
+  font-size: 1.05rem;
+  margin-bottom: 24px;
+}
+
+.produit-specs {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.spec-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--beige-fonce);
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--texte);
+}
+.spec-chip .chip-icon { font-size: 1.1rem; }
+
+.gros-prix {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.gros-prix .num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--vert-canne);
+  line-height: 1;
+}
+.gros-prix .det { font-size: 1rem; color: var(--texte-doux); }
+
+@media (prefers-color-scheme: dark) {
+  .produit-content h2 { color: var(--vert-pale); }
+  .spec-chip { background: rgba(255,255,255,0.06); }
+  .gros-prix .num { color: var(--or-clair); }
+}
+
+@media (max-width: 768px) {
+  .produit-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .produit-img-wrap { aspect-ratio: 3/2; }
+}
+
+/* ═══════════════════════════════
+   ORIGINE
+═══════════════════════════════ */
+.origine {
+  padding: 90px 0;
+  background: var(--vert-canne);
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.origine::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: var(--beige);
+  clip-path: ellipse(55% 100% at 50% 0%);
+}
+.origine::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: var(--beige-fonce);
+  clip-path: ellipse(55% 100% at 50% 100%);
+  z-index: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .origine::before { background: var(--beige); }
+  .origine::after { background: var(--beige-fonce); }
+}
+
+.origine-inner { position: relative; z-index: 2; padding: 20px 20px; }
+
+.origine h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.origine h2 span { color: var(--or-clair); }
+
+.origine-intro {
+  text-align: center;
+  opacity: 0.88;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  font-size: 1.05rem;
+}
+
+.origine-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.origine-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  transition: background var(--transition), transform var(--transition);
+}
+.origine-card:hover {
+  background: rgba(255,255,255,0.13);
+  transform: translateY(-4px);
+}
+
+.origine-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 14px;
+}
+.origine-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--or-clair);
+  margin-bottom: 8px;
+}
+.origine-card p { font-size: 0.95rem; opacity: 0.85; }
+
+/* ═══════════════════════════════
+   CONSERVATION
+═══════════════════════════════ */
+.conservation {
+  padding: 90px 0;
+  background: var(--beige-fonce);
+}
+
+.conservation-inner {
+  padding: 0 20px;
+}
+
+.conservation h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--vert-canne);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.conservation-subtitle {
+  text-align: center;
+  color: var(--texte-doux);
+  font-size: 1.05rem;
+  margin-bottom: 50px;
+}
+
+.conservation-alerte {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(200,168,50,0.12), rgba(200,168,50,0.06));
+  border: 2px solid rgba(200,168,50,0.4);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.alerte-icon { font-size: 2rem; flex-shrink: 0; }
+.alerte-text strong { display: block; font-size: 1rem; color: var(--brun-chaud); margin-bottom: 4px; }
+.alerte-text p { font-size: 0.95rem; color: var(--texte-doux); }
+
+.conservation-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.step-card {
+  background: var(--blanc);
+  border-radius: var(--radius-lg);
+  padding: 28px 22px;
+  text-align: center;
+  border: 1px solid rgba(45,90,27,0.1);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px var(--ombre);
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--vert-canne);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 14px;
+}
+.step-icon { font-size: 2rem; margin-bottom: 10px; }
+.step-card h3 { font-size: 1rem; font-weight: 600; color: var(--texte); margin-bottom: 6px; }
+.step-card p { font-size: 0.88rem; color: var(--texte-doux); }
+
+@media (prefers-color-scheme: dark) {
+  .conservation h2 { color: var(--vert-pale); }
+  .step-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+  .step-num { background: var(--vert-veg); }
+  .alerte-text strong { color: var(--or-clair); }
+}
+
+/* ═══════════════════════════════
+   AVANTAGES
+═══════════════════════════════ */
+.avantages {
+  padding: 90px 0;
+  background: var(--blanc);
+}
+
+.avantages h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--vert-canne);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.avantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  padding: 0 20px;
+}
+
+.avantage-item {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.av-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--vert-canne), var(--vert-veg));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 16px;
+  box-shadow: 0 8px 20px rgba(45,90,27,0.25);
+  transition: transform var(--transition);
+}
+.avantage-item:hover .av-icon { transform: scale(1.08) rotate(-3deg); }
+
+.avantage-item h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--texte);
+  margin-bottom: 6px;
+}
+.avantage-item p { font-size: 0.9rem; color: var(--texte-doux); }
+
+@media (prefers-color-scheme: dark) {
+  .avantages h2 { color: var(--vert-pale); }
+  .av-icon { background: linear-gradient(135deg, var(--vert-veg), var(--vert-pale)); }
+}
+
+/* ═══════════════════════════════
+   FAQ
+═══════════════════════════════ */
+.faq {
+  padding: 90px 0;
+  background: var(--beige);
+}
+
+.faq h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--vert-canne);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  border: 1px solid rgba(45,90,27,0.1);
+  overflow: hidden;
+}
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 20px 24px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--texte);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: color var(--transition);
+}
+.faq-q:hover { color: var(--vert-veg); }
+.faq-q .faq-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  color: var(--vert-veg);
+}
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.25s ease;
+  padding: 0 24px;
+  font-size: 0.95rem;
+  color: var(--texte-doux);
+  line-height: 1.65;
+}
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding: 0 24px 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .faq h2 { color: var(--vert-pale); }
+  .faq-item { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+}
+
+/* ═══════════════════════════════
+   CONTACT
+═══════════════════════════════ */
+.contact {
+  padding: 100px 0;
+  background: linear-gradient(145deg, var(--vert-canne) 0%, #1A4010 100%);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 80px;
+  background: var(--beige);
+  clip-path: ellipse(55% 100% at 50% 0%);
+}
+@media (prefers-color-scheme: dark) {
+  .contact::before { background: var(--beige); }
+}
+
+.contact-inner { position: relative; z-index: 1; padding: 0 20px; }
+
+.contact h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.contact p {
+  font-size: 1.1rem;
+  opacity: 0.88;
+  margin-bottom: 40px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-btn {
+  font-size: 1.15rem;
+  padding: 18px 36px;
+}
+
+.contact-tel {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  opacity: 0.65;
+}
+
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+footer {
+  background: #0F2008;
+  color: rgba(255,255,255,0.7);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--or-clair);
+  margin-bottom: 8px;
+}
+
+.footer-sub {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+.footer-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--wa-green);
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+.footer-wa:hover { opacity: 0.8; }
+
+.footer-copy {
+  font-size: 0.8rem;
+  opacity: 0.4;
+}
+
+/* ═══════════════════════════════
+   BOUTON FLOTTANT WHATSAPP
+═══════════════════════════════ */
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  width: 60px;
+  height: 60px;
+  background: var(--wa-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+  animation: pulse-wa 2.5s ease-in-out infinite;
+  transition: transform var(--transition), box-shadow var(--transition);
+  text-decoration: none;
+}
+.wa-float:hover {
+  transform: scale(1.1);
+  animation: none;
+  box-shadow: 0 8px 30px rgba(37,211,102,0.6);
+}
+
+@keyframes pulse-wa {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+  50% { box-shadow: 0 4px 35px rgba(37,211,102,0.75), 0 0 0 10px rgba(37,211,102,0.12); }
+}
+
+/* ═══════════════════════════════
+   BOUTON RETOUR EN HAUT
+═══════════════════════════════ */
+.back-top {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  z-index: 998;
+  width: 44px;
+  height: 44px;
+  background: var(--blanc);
+  border: 1.5px solid rgba(45,90,27,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+  font-size: 1.2rem;
+  color: var(--vert-canne);
+  text-decoration: none;
+  box-shadow: 0 2px 10px var(--ombre);
+}
+.back-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.back-top:hover { transform: translateY(-3px); }
+
+@media (prefers-color-scheme: dark) {
+  .back-top {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.15);
+    color: var(--vert-pale);
+  }
+}
+
+/* ═══════════════════════════════
+   ANIMATIONS AU SCROLL
+═══════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+  .wa-float { animation: none; }
+  .hero-bouteille { animation: none; }
+}
+</style>
 </head>
 <body>
 
-    <!-- Header Fixe -->
-    <header class="header">
-        <div class="container header-container">
-            <a href="#" class="logo" aria-label="Tropicanne Guadeloupe Accueil">
-                Trop<span class="cane-i-wrapper">
-                    <svg class="cane-i-svg" viewBox="0 0 10 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5,2 L5,28" stroke="var(--primary-green)" stroke-width="3" stroke-linecap="round"/>
-                        <path d="M3,10 C5,9 7,9 7,10" stroke="var(--accent-yellow)" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M3,18 C5,17 7,17 7,18" stroke="var(--accent-yellow)" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M5,8 C8,5 11,6 10,2" stroke="var(--primary-green)" stroke-width="1.5" fill="var(--primary-green)"/>
-                    </svg>
-                </span>canne
-            </a>
-            
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="#pourquoi" class="nav-link">Pourquoi nous ?</a></li>
-                    <li><a href="#produit" class="nav-link">Le Jus</a></li>
-                    <li><a href="#commander" class="nav-link">Commande</a></li>
-                    <li><a href="#livraison" class="nav-link">Livraison</a></li>
-                    <li><a href="#faq" class="nav-link">FAQ</a></li>
-                </ul>
-                <a href="https://wa.me/590690932947?text=Bonjour%20Tropicanne%20!%20Je%20souhaite%20commander%20du%20jus%20de%20canne%20frais." class="btn btn-primary" target="_blank" rel="noopener noreferrer">Commander</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section class="hero" id="accueil">
-            <div class="hero-overlay"></div>
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <span class="hero-badge">Produit 100% Local • Guadeloupe</span>
-                    <h1>Le jus Pur de Guadeloupe, <br><span>Pressé Dimanche Matin</span></h1>
-                    <p class="hero-p">Découvrez la fraîcheur absolue du jus de canne à sucre traditionnel. Pressé de manière artisanale au Lamentin et livré directement chez vous frais.</p>
-                    
-                    <div class="hero-cta-group">
-                        <a href="https://wa.me/590690932947?text=Bonjour%20Tropicanne%20!%20Je%20souhaite%20commander%20du%20jus%20de%20canne%20frais." class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right:8px;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.62.963 3.21 1.47 5.416 1.47 5.4 0 9.795-4.386 9.799-9.773.001-2.61-1.011-5.064-2.852-6.908-1.839-1.844-4.283-2.86-6.91-2.861-5.399 0-9.795 4.387-9.799 9.774-.002 2.085.545 4.12 1.586 5.922l-.992 3.626 3.752-.984z"/></svg>
-                            Commander via WhatsApp
-                        </a>
-                        <div class="hero-price-tag">
-                            <span class="hero-price-amount">4,00 €</span>
-                            <span class="hero-price-vol">La Bouteille de 1,25 L</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Alerte Produit Frais -->
-        <section class="alert-section">
-            <div class="container">
-                <div class="alert-wrapper">
-                    <div class="alert-icon-container">
-                        <svg class="alert-icon" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                        </svg>
-                    </div>
-                    <div class="alert-text-content">
-                        <h3>Attention : Produit Ultra-Frais & Fragile</h3>
-                        <p>Notre jus de canne à sucre est 100% pur, sans aucun conservateur ni pasteurisation. Il doit être impérativement conservé au réfrigérateur entre 0°C et 4°C et consommé rapidement après réception.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Pourquoi Tropicanne -->
-        <section class="section" id="pourquoi">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Une Qualité Premium</span>
-                    <h2 class="section-title">Pourquoi Tropicanne ?</h2>
-                    <p>Découvrez notre engagement pour un jus authentique, sain et d'une fraîcheur inégalée en Guadeloupe.</p>
-                </div>
-                
-                <div class="why-grid">
-                    <div class="why-card">
-                        <div class="why-badge-icon">
-                            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                        </div>
-                        <h3>Pressé le Jour Même</h3>
-                        <p>Aucun stockage prolongé. Notre jus est fraîchement extrait le dimanche matin, quelques heures seulement avant de rejoindre votre table.</p>
-                    </div>
-                    
-                    <div class="why-card">
-                        <div class="why-badge-icon">
-                            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                        </div>
-                        <h3>Respect de la Chaîne du Froid</h3>
-                        <p>Nous transportons votre commande dans des conditions thermiques optimales pour conserver tous les nutriments et le goût original du jus de canne.</p>
-                    </div>
-                    
-                    <div class="why-card">
-                        <div class="why-badge-icon">
-                            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        </div>
-                        <h3>100% Local & Artisanal</h3>
-                        <p>Nos cannes sont rigoureusement sélectionnées en Guadeloupe et broyées au Lamentin.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Produit Spotlight -->
-
-        <!-- Section Comment Commander -->
-        <section class="section" id="commander">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Un Processus Simple</span>
-                    <h2 class="section-title">Comment Commander ?</h2>
-                    <p>Notre fonctionnement est 100% direct et sécurisé via WhatsApp pour vous garantir la meilleure réactivité.</p>
-                </div>
-                
-                <div class="step-grid">
-                    <div class="step-card">
-                        <div class="step-number">I</div>
-                        <h3>Prise de Contact</h3>
-                        <p>Cliquez sur l'un de nos boutons d'appel à l'action pour ouvrir WhatsApp avec un message pré-rempli.</p>
-                    </div>
-                    
-                    <div class="step-card">
-                        <div class="step-number">II</div>
-                        <h3>Validation</h3>
-                        <p>Indiquez-nous votre adresse complète et la quantité souhaitée. Nous validons votre créneau de livraison.</p>
-                    </div>
-                    
-                    <div class="step-card">
-                        <div class="step-number">III</div>
-                        <h3>Livraison Fraîche</h3>
-                        <p>Notre livreur passe à votre domicile le dimanche pour vous apporter votre jus pressé du matin.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Livraison -->
-        <section class="section bg-alt" id="livraison">
-            <div class="container delivery-wrapper">
-                <div class="delivery-visual-card">
-                    <h3>Zones Desservies</h3>
-                    <ul class="delivery-communes-list">
-                        <li class="commune-item">
-                            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                            <span>Lamentin (Guadeloupe)</span>
-                        </li>
-                        <li class="commune-item">
-                            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                            <span>Baie-Mahault</span>
-                        </li>
-                        <li class="commune-item">
-                            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                            <span>Petit-Bourg</span>
-                        </li>
-                        <li class="commune-item">
-                            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                            <span>Les Abymes</span>
-                        </li>
-                    </ul>
-                    <span class="delivery-badge-origin">Zone de production : Lamentin</span>
-                </div>
-                
-                <div class="delivery-instruction">
-                    <span class="section-tag">Une logistique rigoureuse</span>
-                    <h2>Livré chez vous <br>chaque dimanche</h2>
-                    <p class="delivery-lead">Afin de vous garantir un jus pressé du matin-même, nous effectuons l'ensemble de nos livraisons le dimanche uniquement.</p>
-                    
-                    <div class="deadline-highlight-box">
-                        <strong>Clôture des commandes :</strong>
-                        Vendredi à 12h00 pour la livraison du dimanche suivant. Toute commande passée après cette limite sera planifiée pour le dimanche d'après.
-                    </div>
-                    
-                    <div>
-                        <a href="https://wa.me/590690932947?text=Bonjour%20Tropicanne%20!%20Je%20souhaite%20commander%20du%20jus%20de%20canne%20frais." class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
-                            Planifier ma livraison
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section FAQ -->
-        <section class="section" id="faq">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Une Question ?</span>
-                    <h2 class="section-title">Foire Aux Questions</h2>
-                    <p>Voici les réponses à vos questions les plus fréquentes sur notre jus et nos livraisons.</p>
-                </div>
-                
-                <div class="faq-accordion">
-                    <details class="faq-item" open>
-                        <summary class="faq-summary">
-                            <span>Combien de temps puis-je conserver mon jus ?</span>
-                            <svg class="faq-summary-arrow" viewBox="0 0 24 24" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                        </summary>
-                        <div class="faq-content">
-                            <p>Notre jus étant 100% naturel, sans aucun conservateur ni traitement thermique, il se conserve idéalement au réfrigérateur entre 0°C et 4°C et doit être consommé dans les 24 à 48 heures maximum après livraison pour préserver son profil gustatif unique.</p>
-                        </div>
-                    </details>
-                    
-                    
-                    <details class="faq-item">
-                        <summary class="faq-summary">
-                            <span>Pourquoi livrez-vous uniquement le dimanche ?</span>
-                            <svg class="faq-summary-arrow" viewBox="0 0 24 24" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                        </summary>
-                        <div class="faq-content">
-                            <p>Le jus de canne à sucre frais s'oxyde très rapidement. Afin de vous proposer un produit d'une fraîcheur absolue et irréprochable, nous pressons le jus le dimanche aux aurores et nos livreurs partent immédiatement en tournée de livraison.</p>
-                        </div>
-                    </details>
-                    
-                    <details class="faq-item">
-                        <summary class="faq-summary">
-                            <span>Proposez-vous d'autres formats de bouteilles ?</span>
-                            <svg class="faq-summary-arrow" viewBox="0 0 24 24" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                        </summary>
-                        <div class="faq-content">
-                            <p>Pour le moment, nous nous concentrons sur notre format familial de 1,25 L au prix unique de 4 €, idéal pour partager un moment convivial en famille ou entre amis lors du repas du dimanche.</p>
-                        </div>
-                    </details>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Témoignages -->
-        <section class="section bg-alt" id="temoignages">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Vos Avis</span>
-                    <h2 class="section-title">Ce qu'en disent nos clients</h2>
-                    <p>Découvrez les retours authentiques de nos habitués des tournées du dimanche en Guadeloupe.</p>
-                </div>
-                
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <svg class="quote-icon" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.988zm-14 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.154c-2.433.914-3.996 3.635-3.996 5.846h4v10h-10z"/></svg>
-                        <p class="testimonial-quote">"Une véritable redécouverte ! Boire ce jus frais le dimanche midi avec les enfants est devenu notre nouveau rituel. La fraîcheur est incroyable."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">SL</div>
-                            <div class="author-info">
-                                <h4>Sonia L.</h4>
-                                <p>Baie-Mahault</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <svg class="quote-icon" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.988zm-14 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.154c-2.433.914-3.996 3.635-3.996 5.846h4v10h-10z"/></svg>
-                        <p class="testimonial-quote">"Excellent service client ! Commande simple sur WhatsApp le mercredi, livraison à domicile impeccable le dimanche matin avec un jus délicieux et glacé."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">MD</div>
-                            <div class="author-info">
-                                <h4>Mathieu D.</h4>
-                                <p>Petit-Bourg</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <svg class="quote-icon" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.988zm-14 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.154c-2.433.914-3.996 3.635-3.996 5.846h4v10h-10z"/></svg>
-                        <p class="testimonial-quote">"Le vrai jus de canne à sucre brut de notre enfance. On sent l'amour du produit et le savoir-faire artisanal. Je recommande chaleureusement."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">VC</div>
-                            <div class="author-info">
-                                <h4>Valérie C.</h4>
-                                <p>Les Abymes</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h2>Trop<span class="cane-i-wrapper">
-                        <svg class="cane-i-svg" viewBox="0 0 10 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5,2 L5,28" stroke="var(--accent-yellow)" stroke-width="3" stroke-linecap="round"/>
-                            <path d="M3,10 C5,9 7,9 7,10" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M3,18 C5,17 7,17 7,18" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M5,8 C8,5 11,6 10,2" stroke="var(--accent-yellow)" stroke-width="1.5" fill="var(--accent-yellow)"/>
-                        </svg>
-                    </span>canne</h2>
-                    <p>Producteur artisanal de jus de canne frais en Guadeloupe. L'authenticité et la fraîcheur réunies dans une bouteille familiale.</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Navigation</h3>
-                    <ul class="footer-links">
-                        <li><a href="#pourquoi" class="footer-link">Pourquoi Tropicanne</a></li>
-                        <li><a href="#produit" class="footer-link">Le Jus</a></li>
-                        <li><a href="#livraison" class="footer-link">Zones de livraison</a></li>
-                        <li><a href="#faq" class="footer-link">FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact & Atelier</h3>
-                    <div class="footer-contact-item">
-                        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        <span>Lamentin, Guadeloupe</span>
-                    </div>
-                    <div class="footer-contact-item">
-                        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        <span>+590 690 93 29 47</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2026 Tropicanne. Tous droits réservés.</p>
-                <p>Site à vocation démonstrative — L'abus d'alcool n'est pas applicable, consommez du jus de canne frais sans modération !</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bouton WhatsApp Flottant Permanent -->
-    <a href="https://wa.me/590690932947?text=Bonjour%20Tropicanne%20!%20Je%20souhaite%20commander%20du%20jus%20de%20canne%20frais." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Commander instantanément sur WhatsApp">
-        <svg class="whatsapp-float-svg" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.62.963 3.21 1.47 5.416 1.47 5.4 0 9.795-4.386 9.799-9.773.001-2.61-1.011-5.064-2.852-6.908-1.839-1.844-4.283-2.86-6.91-2.861-5.399 0-9.795 4.387-9.799 9.774-.002 2.085.545 4.12 1.586 5.922l-.992 3.626 3.752-.984z"/>
-        </svg>
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <!-- Logo Tropicanne avec "i" stylisé en canne -->
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="32" height="32" rx="10" fill="#2D5A1B"/>
+        <path d="M16 4 C16 4, 14 7, 15 10 C15.5 12, 17 11, 17 14 C17 17, 15 17, 15 20 C15 23, 16.5 25, 16 28" stroke="#C8A832" stroke-width="2" stroke-linecap="round"/>
+        <path d="M16 9 C16 9, 18 7.5, 20 8.5" stroke="#7DB85A" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M15.5 14 C15.5 14, 13 13, 12 11" stroke="#7DB85A" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M16 19 C16 19, 18.5 18, 19.5 19.5" stroke="#7DB85A" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Tropicanne
     </a>
 
+
+    <a href="https://wa.me/590690932947?text=Bonjour+Mathis,+est+ce+qu'il+te+reste+des+bouteilles+de+jus ?" target="_blank" rel="noopener" class="btn-wa nav-wa" aria-label="Contacter sur WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span>Commander</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <!-- Pattern décoratif de cannes SVG -->
+  <div class="hero-pattern" aria-hidden="true">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="cannes" x="0" y="0" width="80" height="120" patternUnits="userSpaceOnUse">
+          <path d="M20 110 C20 110, 18 80, 20 50 C22 20, 19 5, 20 2" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M20 40 C20 40, 28 35, 30 28" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M20 60 C20 60, 12 56, 10 50" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M20 75 C20 75, 27 72, 29 65" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M55 115 C55 115, 53 85, 55 55 C57 25, 54 8, 55 4" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M55 45 C55 45, 63 41, 65 34" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M55 70 C55 70, 47 66, 46 59" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#cannes)"/>
+    </svg>
+  </div>
+
+  <div class="hero-content container">
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        Artisanal · Guadeloupe
+      </div>
+      <h1>Le vrai goût<br>de la <em>canne</em><br>en bouteille</h1>
+      <p class="hero-desc">Pressé à la main, congelé dans la foulée pour garder toute sa fraîcheur. Du champ au verre, sans détour.</p>
+      <div class="hero-prix">
+        <span class="prix-num">4 €</span>
+        <span class="prix-info">la bouteille 1,5 L</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="https://wa.me/590690932947?text=Bonjour%2C+je+souhaiterais+avoir+des+informations+sur+le+jus+de+canne+Tropicanne." target="_blank" rel="noopener" class="btn-wa">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Commander sur WhatsApp
+        </a>
+        <a href="#produit" class="btn-outline" style="border-color:rgba(255,255,255,0.5);color:#fff;">
+          En savoir plus
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-bouteille">
+        <div class="bouteille-label">
+          <!-- Tige de canne décorative -->
+          <svg width="40" height="60" viewBox="0 0 40 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:8px">
+            <path d="M20 55 C20 55, 18 40, 20 25 C22 10, 19 2, 20 1" stroke="#C8A832" stroke-width="3" stroke-linecap="round"/>
+            <path d="M20 20 C20 20, 28 16, 30 10" stroke="#7DB85A" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 32 C20 32, 12 29, 10 23" stroke="#7DB85A" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 43 C20 43, 27 40, 29 35" stroke="#7DB85A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <div class="bouteille-brand">Tropicanne</div>
+          <div class="bouteille-sub">Jus de canne artisanal</div>
+          <div class="bouteille-sub" style="margin-top:2px">Guadeloupe</div>
+          <div class="bouteille-vol">1,5 L</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPRIT TROPICANNE -->
+<section class="esprit" id="esprit">
+  <div class="esprit-inner reveal">
+    <h2>Une activité locale,<br>faite avec le cœur</h2>
+    <p>
+      Tropicanne, c'est une petite aventure artisanale née en Guadeloupe, portée par l'amour du terroir. Pas d'usine, pas d'additifs — juste de la canne fraîche, pressée et mise en bouteille avec soin.
+    </p>
+    <p>
+      Chaque bouteille est préparée en petite quantité pour garantir la qualité et la fraîcheur. On choisit nos cannes parmi nos champs du Lamentin et nos agriculteurs partenaires. 
+    </p>
+  </div>
+</section>
+
+<!-- PRODUIT -->
+<section class="produit" id="produit">
+  <div class="produit-grid container">
+
+    <div class="produit-content reveal">
+      <span class="section-eyebrow">Le produit</span>
+      <h2>Jus de canne<br>100% pur jus</h2>
+      <p>
+        Rien que la canne à sucre et son jus naturel — aucun sucre ajouté, aucun conservateur, aucun arôme artificiel. Le goût authentique de la canne guadeloupéenne, comme si vous étiez au bord du champ.
+      </p>
+
+      <div class="produit-specs">
+        <span class="spec-chip"><span class="chip-icon">🌿</span> 100% naturel</span>
+        <span class="spec-chip"><span class="chip-icon">📦</span> Bouteille 1,5 L</span>
+        <span class="spec-chip"><span class="chip-icon">❄️</span> Congelé frais</span>
+        <span class="spec-chip"><span class="chip-icon">🚫</span> Sans additifs</span>
+      </div>
+
+      <div class="gros-prix">
+        <span class="num">4 €</span>
+        <span class="det">la bouteille · 1,5 L</span>
+      </div>
+
+      <a href="https://wa.me/590690932947?text=Bonjour%2C+je+souhaiterais+avoir+des+informations+sur+le+jus+de+canne+Tropicanne." target="_blank" rel="noopener" class="btn-wa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Je commande
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGINE -->
+<section class="origine" id="origine">
+  <div class="origine-inner container reveal">
+    <h2>De la terre <span>guadeloupéenne</span><br>jusqu'à vous</h2>
+    <p class="origine-intro">
+      On connaît nos champs, on connaît nos producteurs. La canne qu'on presse, c'est celle de chez nous — récoltée à maturité, travaillée le jour même.
+    </p>
+    <div class="origine-cards">
+      <div class="origine-card">
+        <div class="origine-card-icon">🌾</div>
+        <h3>Le Lamentin</h3>
+        <p>Notre source principale. Les plaines du Lamentin offrent une canne à sucre dense, sucrée, idéale pour un jus riche en saveur.</p>
+      </div>
+      <div class="origine-card">
+        <div class="origine-card-icon">🤝</div>
+        <h3>Circuit court</h3>
+        <p>De la récolte au pressage, tout se passe en Guadeloupe. On travaille avec des acteurs locaux, pour un produit vraiment local.</p>
+      </div>
+      <div class="origine-card">
+        <div class="origine-card-icon">⏱️</div>
+        <h3>Pressé rapidement</h3>
+        <p>La canne est pressée peu après la récolte, puis congelée immédiatement. Pas de temps perdu, pour un goût au plus proche du naturel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSERVATION -->
+<section class="conservation" id="conservation">
+  <div class="conservation-inner container reveal">
+    <span class="section-eyebrow" style="display:block;text-align:center;">Comment bien conserver votre jus</span>
+    <h2>⚠️ Conservation — à lire avant tout</h2>
+    <p class="conservation-subtitle">Le jus de canne est un produit vivant, fragile. Suivez ces étapes simples pour en profiter à 100%.</p>
+
+    <div class="conservation-alerte">
+      <span class="alerte-icon">🧊</span>
+      <div class="alerte-text">
+        <strong>Ce produit est fragile — respectez la chaîne du froid</strong>
+        <p>Le jus de canne Tropicanne est livré congelé et doit le rester jusqu'à sa dégustation. Une fois décongelé, il ne peut pas être recongelé. Merci de lire les instructions ci-dessous.</p>
+      </div>
+    </div>
+
+    <div class="conservation-steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-icon">❄️</div>
+        <h3>Conservez au congélateur</h3>
+        <p>Dès réception, placez la bouteille directement au congélateur. Elle s'y conserve plusieurs semaines.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-icon">🌡️</div>
+        <h3>Décongelez au réfrigérateur</h3>
+        <p>La veille de votre dégustation, transférez la bouteille au réfrigérateur. Laissez-la décongeler lentement, au froid.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-icon">🫙</div>
+        <h3>Agitez avant de servir</h3>
+        <p>Le jus naturel peut se séparer à la décongélation. Secouez bien la bouteille avant de verser.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-icon">⏰</div>
+        <h3>Consommez en 24 à 48h</h3>
+        <p>Une fois décongelé et ouvert, consommez le jus dans les 24 à 48 heures. Au-delà, il perd en qualité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVANTAGES -->
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container reveal">
+    <span class="section-eyebrow" style="display:block;text-align:center;margin-bottom:12px">Questions fréquentes</span>
+    <h2>Vous avez des questions ?</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-a" role="region">
+          Le jus de canne Tropicanne est vendu à <strong>4 € la bouteille de 1,5 L</strong>. Pour les commandes groupées ou toute question de livraison, contactez-nous sur WhatsApp.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Quel format de bouteille proposez-vous ?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a" role="region">
+          On propose actuellement la bouteille de <strong>1,5 L</strong>. C'est un beau volume pour partager en famille ou conserver quelques jours après décongélation.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Comment conserver le jus ?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a" role="region">
+          Le jus est livré <strong>congelé</strong>. Gardez-le au congélateur jusqu'à la veille de votre consommation. Décongelez-le ensuite au réfrigérateur, et consommez-le dans les <strong>24 à 48h</strong> après décongélation. Bien agiter avant de servir.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          D'où vient la canne à sucre ?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a" role="region">
+          La canne vient principalement du <strong>Lamentin</strong>, en Guadeloupe. Selon la disponibilité de la récolte, on s'approvisionne aussi au près <strong>d'agriculteurs partenaires</strong>. 
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-a" role="region">
+          Absolument pas. Le jus Tropicanne, c'est <strong>100% jus de canne naturel</strong>, sans sucre ajouté, sans conservateur, sans arôme artificiel. Rien que la canne.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Comment vous contacter pour commander ?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a" role="region">
+          On commande uniquement via <strong>WhatsApp au +590 690 93 29 47</strong>. Cliquez sur n'importe quel bouton vert de ce site — le message sera déjà prérempli pour vous.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Puis-je recongeler le jus une fois décongelé ?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a" role="region">
+          <strong>Non</strong>, il ne faut pas recongeler le jus une fois décongelé. C'est un produit fragile — une fois sorti du congélateur, il doit être consommé dans les 24 à 48h. Respectez la chaîne du froid.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner container reveal">
+    <span class="section-eyebrow" style="color:rgba(200,168,50,0.8);margin-bottom:14px;display:block">Passez votre commande</span>
+    <h2>Prêt à goûter ?</h2>
+    <p>Une question, une commande, une envie de jus de canne ? On se retrouve sur WhatsApp. Réponse rapide, c'est promis.</p>
+    <a href="https://wa.me/590690932947?text=Bonjour%2C+je+souhaiterais+avoir+des+informations+sur+le+jus+de+canne+Tropicanne." target="_blank" rel="noopener" class="btn-wa contact-btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Écrire sur WhatsApp
+    </a>
+    <p class="contact-tel">+590 690 93 29 47</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Tropicanne</div>
+  <div class="footer-sub">Jus de canne artisanal · Guadeloupe 🌴</div>
+  <a href="https://wa.me/590690932947?text=Bonjour%2C+je+souhaiterais+avoir+des+informations+sur+le+jus+de+canne+Tropicanne." target="_blank" rel="noopener" class="footer-wa">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    +590 690 93 29 47
+  </a>
+  <div class="footer-copy">© 2025 Tropicanne · Fait en Guadeloupe avec amour 🤍</div>
+</footer>
+
+<!-- BOUTON FLOTTANT WHATSAPP -->
+<a href="https://wa.me/590690932947?text=Bonjour%2C+je+souhaiterais+avoir+des+informations+sur+le+jus+de+canne+Tropicanne." target="_blank" rel="noopener" class="wa-float" aria-label="Contacter Tropicanne sur WhatsApp">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- BOUTON RETOUR EN HAUT -->
+<a href="#" class="back-top" id="backTop" aria-label="Retour en haut">↑</a>
+
+<script>
+// ═══════════════════════════════
+// BOUTON RETOUR EN HAUT
+// ═══════════════════════════════
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true });
+
+// ═══════════════════════════════
+// FAQ ACCORDÉON
+// ═══════════════════════════════
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // Ferme tout
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    // Ouvre si pas déjà ouvert
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+// ═══════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
